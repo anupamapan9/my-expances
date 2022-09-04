@@ -68,7 +68,7 @@ export default function Form() {
                 </div>
 
                 <button disabled={isLoading} className="btn" type="submit">Add Transaction</button>
-                {!isLoading && !isError &&
+                {!isLoading && !isError && error &&
                     <p className="error">
                         There is an error occurs
                     </p>
