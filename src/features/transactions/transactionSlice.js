@@ -6,6 +6,7 @@ const initialState = {
     isLoading: false,
     isError: false,
     error: '',
+    editing: {}
 }
 
 
@@ -20,12 +21,12 @@ export const createTransaction = createAsyncThunk('transaction/createTransaction
     return transaction;
 })
 export const changeTransaction = createAsyncThunk('transaction/changeTransaction', async ({ id, data }) => {
-    const transaction = await addTransaction(id, data);
+    const transaction = await editTransaction(id, data);
     return transaction;
 })
 
 export const removeTransaction = createAsyncThunk('transaction/removeTransaction', async (id, data) => {
-    const transaction = await addTransaction(id);
+    const transaction = await deleteTransaction(id);
     return transaction;
 })
 
@@ -35,6 +36,14 @@ export const removeTransaction = createAsyncThunk('transaction/removeTransaction
 const transactionSlice = createSlice({
     name: 'transaction',
     initialState,
+    reducers: {
+        editActive: (state, action) => {
+            state.editing = action.payload
+        },
+        editInaction: (state, action) => {
+            state.editing = {}
+        },
+    },
     extraReducers:
         (builder) => {
             builder
@@ -104,3 +113,4 @@ const transactionSlice = createSlice({
         }
 });
 export default transactionSlice.reducer;
+export const { editActive, editInaction } = transactionSlice.actions;
