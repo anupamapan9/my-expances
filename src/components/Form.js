@@ -52,7 +52,7 @@ export default function Form() {
             id: editing?.id,
             data: {
                 name: name,
-                amount: amount,
+                amount: Number(amount),
                 type: type
             }
 
